@@ -1,3 +1,2 @@
-require("config.lazy")
-require("config.options")
-require("config.keymaps") 
+require("ryuk.core")
+require("ryuk.lazy")
