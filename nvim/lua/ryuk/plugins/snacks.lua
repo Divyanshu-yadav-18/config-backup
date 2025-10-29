@@ -13,13 +13,27 @@ return {
 		},
 		input = {},
 		bigfile = { enabled = true },
-		-- dashboard = {
-		-- 	sections = {
-		-- 		{ section = "header" },
-		-- 		{ section = "keys", gap = 1, padding = 1 },
-		-- 		{ section = "startup" },
-		-- 	},
-		-- },
+		dashboard = {
+			enabled = true,
+			header_pad = 2,
+			center_header = true,
+			sections = {
+				{
+					section = "header",
+					content = {
+						"██████╗ ██╗   ██╗██╗   ██╗██╗  ██╗",
+						"██╔══██╗╚██╗ ██╔╝██║   ██║██║ ██╔╝",
+						"██████╔╝ ╚████╔╝ ██║   ██║█████╔╝ ",
+						"██╔══██╗  ╚██╔╝  ██║   ██║██╔═██╗ ",
+						"██║  ██║   ██║   ╚██████╔╝██║  ██╗",
+						"╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝",
+					},
+				},
+				{ section = "keys", gap = 1, padding = 1 },
+				{ section = "startup" },
+			},
+		},
+
 		notifier = {
 			enabled = true,
 			timeout = 3000,
@@ -389,6 +403,14 @@ return {
 					.option("background", { off = "light", on = "dark", name = "Dark Background" })
 					:map("<leader>ub")
 				Snacks.toggle.inlay_hints():map("<leader>uh")
+			end,
+		})
+
+		vim.api.nvim_create_autocmd("VimEnter", {
+			callback = function()
+				if vim.fn.argc() == 0 then
+					Snacks.dashboard.open()
+				end
 			end,
 		})
 	end,
