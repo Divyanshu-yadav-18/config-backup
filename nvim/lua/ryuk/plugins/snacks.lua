@@ -17,6 +17,7 @@ return {
 			enabled = true,
 			header_pad = 2,
 			center_header = true,
+			autowipe = false, -- prevents “No such group: --Deleted--” error
 			sections = {
 				{
 					section = "header",
@@ -29,8 +30,6 @@ return {
 						"╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝",
 					},
 				},
-				{ section = "keys", gap = 1, padding = 1 },
-				{ section = "startup" },
 			},
 		},
 
