@@ -46,17 +46,24 @@ return {
     })
 
     -- UI signs
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-      vim.fn.sign_define("DiagnosticSign" .. type, { text = icon, texthl = "DiagnosticSign" .. type })
-    end
+-- UI signs (Updated for Neovim 0.10+)
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN]  = " ",
+      [vim.diagnostic.severity.HINT]  = "󱐋",
+      [vim.diagnostic.severity.INFO]  = " ",
+    },
+  },
+})
 
     ----------------------------------------------------
     -- SETUP SERVERS MANUALLY (v3.x recommended method)
     ----------------------------------------------------
 
     -- Lua
-    lspconfig.lua_ls.setup({
+    lspconfig.lua_ls.setup {
       capabilities = capabilities,
       settings = {
         Lua = {
@@ -64,10 +71,10 @@ return {
           completion = { callSnippet = "Replace" },
         },
       },
-    })
+    }
 
     -- TS
-    lspconfig.ts_ls.setup({
+    lspconfig.ts_ls.setup {
       capabilities = capabilities,
       filetypes = {
         "javascript",
@@ -75,13 +82,32 @@ return {
         "typescript",
         "typescriptreact",
       },
-    })
+    }
 
     -- C++
-    lspconfig.clangd.setup({
+    lspconfig.clangd.setup {
       capabilities = capabilities,
       cmd = { "clangd", "--background-index" },
-    })
+    }
+
+    -- Go
+    lspconfig.gopls.setup {
+      capabilities = capabilities,
+      settings = {
+        gopls = {
+          analyses = {
+            unusedparams = true,
+            shadow = true,
+          },
+          staticcheck = true,
+          gofumpt = true,
+          hints = {
+            assignVariableTypes = true,
+            parameterNames = true,
+            rangeVariableTypes = true,
+          },
+        },
+      },
+    }
   end,
 }
-
