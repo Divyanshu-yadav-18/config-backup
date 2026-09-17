@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
+# Scripts for refreshing ags, waybar, rofi, swaync, wallust
 
 SCRIPTSDIR=$HOME/.config/hypr/scripts
 UserScripts=$HOME/.config/hypr/UserScripts
@@ -20,19 +22,32 @@ for _prs in "${_ps[@]}"; do
   fi
 done
 
-# quit ags
-ags -q
+# added since wallust sometimes not applying
+killall -SIGUSR2 waybar
+# Added sleep for GameMode causing multiple waybar
+sleep 0.1
 
-sleep 0.3
+# quit ags & relaunch ags
+#ags -q && ags &
+
+# quit quickshell & relaunch quickshell
+#pkill qs && qs &
+
+# some process to kill
+for pid in $(pidof waybar rofi swaync ags swaybg); do
+  kill -SIGUSR1 "$pid"
+  sleep 0.1
+done
+
 #Restart waybar
+sleep 0.1
 waybar &
 
 # relaunch swaync
-sleep 0.5
+sleep 0.3
 swaync >/dev/null 2>&1 &
-
-# relaunch ags
-ags &
+# reload swaync
+swaync-client --reload-config
 
 # Relaunching rainbow borders if the script exists
 sleep 1
