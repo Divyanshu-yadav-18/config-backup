@@ -23,7 +23,8 @@ if [ "$HYPRGAMEMODE" = 1 ] ; then
     sleep 0.1
     exit
 else
-	swww-daemon --format xrgb && swww img "$HOME/.config/rofi/.current_wallpaper" &
+	swww query || swww-daemon --format xrgb &
+	swww img "$HOME/.config/rofi/.current_wallpaper" &
 	sleep 0.1
 	${SCRIPTSDIR}/WallustSwww.sh
 	sleep 0.5
