@@ -3,6 +3,9 @@
 # Script for Random Wallpaper ( CTRL ALT W)
 
 wallDIR="$HOME/Pictures/wallpapers"
+if [ ! -d "$wallDIR" ] || [ -z "$(find "$wallDIR" -type f 2>/dev/null)" ]; then
+  wallDIR="$HOME/.config/hypr/wallpapers"
+fi
 SCRIPTSDIR="$HOME/.config/hypr/scripts"
 
 focused_monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')

@@ -5,6 +5,9 @@
 # WALLPAPERS PATH
 terminal=kitty
 wallDIR="$HOME/Pictures/wallpapers"
+if [ ! -d "$wallDIR" ] || [ -z "$(find "$wallDIR" -type f 2>/dev/null)" ]; then
+  wallDIR="$HOME/.config/hypr/wallpapers"
+fi
 SCRIPTSDIR="$HOME/.config/hypr/scripts"
 wallpaper_current="$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
 

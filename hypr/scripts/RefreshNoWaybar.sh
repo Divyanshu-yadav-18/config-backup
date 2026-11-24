@@ -45,4 +45,8 @@ if file_exists "${UserScripts}/RainbowBorders.sh"; then
 fi
 
 
+# Reload Hyprland lua config
+touch "$HOME/.config/hypr/hyprland.lua"
+hyprctl reload 2>/dev/null || true
+
 exit 0

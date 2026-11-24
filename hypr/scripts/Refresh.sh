@@ -49,6 +49,10 @@ swaync >/dev/null 2>&1 &
 # reload swaync
 swaync-client --reload-config
 
+# Reload Hyprland lua config
+touch "$HOME/.config/hypr/hyprland.lua"
+hyprctl reload 2>/dev/null || true
+
 # Relaunching rainbow borders if the script exists
 sleep 1
 if file_exists "${UserScripts}/RainbowBorders.sh"; then
